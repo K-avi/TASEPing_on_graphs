@@ -1,0 +1,34 @@
+redesign of code structure count : 0 
+
+TASEP : 
+
+french ewwww 
+
+-> initialement pr modéliser congestion de traffic 
+
+-> proba sortir / entrer sur un oeud 
+
+-> bouge qd pas saturé 
+
+-> après certain nombre mvmt -> atteint équilibre ; 
+
+-> qd attaque -> enlève lien dc perturbation déplacement 
+   transition avt atteindre un nvl équilibre 
+
+-> idée ici : ne pas faire une attaque ; mais en faire 
+   plusieurs l'une après l'autre pr continuellement perturber l'état de déplacement
+
+-> avoir modèle sur la ville + fonctions d'attaques 
+
+fonction d'attaque : 
+
+-> nb lien à enlever 
+-> fréquence enlève 
+
+ex : 
+
+attaque aléatoire 
+
+ex 1000 ; fq 2 
+
+tt les 2 tours ; enlève 1000 lien (remets ceux d'avant)
