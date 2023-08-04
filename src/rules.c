@@ -45,6 +45,8 @@ uint8_t rule_tasep(S_GRAPH * g , S_ENT_ARR * ent_arr, uint32_t node_from , uint3
 
         ent_arr->entity_prevpos[entity_index] = node_from; //updates position
         ent_arr->entity_curpos[entity_index] = node_to_index;
+
+        ent_arr->moved_entities++;
     }
 
     return R_OK;

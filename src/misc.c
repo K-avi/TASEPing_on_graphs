@@ -14,7 +14,7 @@ char * str_flag(uint8_t flag){
   case G_INDEX : return "warning unused flag";
   case G_NOREAD: return "couldn't retrieve lines from file"; 
   case G_READFAIL: return "couldn't read graphtable from file";
-  case G_PARSE: return "parsing of file failed check that the file is formatted correctly"; 
+  case G_PARSE: return "parsing of graph file failed check that the file is formatted correctly"; 
   case G_NOWRITE: return "couldn't write to fail for graphtable";
   case G_OPENFAIL: return "couldn't open graphtable file"; 
   case ERRFLAG_NOFILE: return "file doesn't exist";  
@@ -25,6 +25,18 @@ char * str_flag(uint8_t flag){
 
   case ET_NULL : return "entities arr pointer is NULL";
   case ET_MALLOC : return "couldn't allocate memory for the entity array";
+
+  case AAR_NULL : return "attack array struct pointer is NULL";
+  case AAR_MALLOC : return "couldn't allocate memory for the attack array";
+
+  case AREP_NULL :  return "attack rep struct pointer is NULL";
+  case AREP_MALLOC : return "couldn't allocate memory for the array of attack array";
+
+  case ERR_NULL: return "NULL pointer caught";
+  case ERR_FOPEN: return "can't open file"; 
+  case F_FORMAT : return "invalid file format";
+
+  case AREP_PARSE : return "parsinf of attack file failed ; please check that the file is formatted correctly";
 
   default : return "unknown error ; how did you get here?\n";
   }

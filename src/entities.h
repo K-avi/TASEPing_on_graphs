@@ -8,6 +8,8 @@ typedef uint32_t entity_pos;
 typedef struct{
 
     uint32_t nb_entities ; //size of the array 
+    uint32_t moved_entities; //number of entities 
+    //moved during an iteration 
 
     entity_pos * entity_curpos ; //current pos of the entities 
     entity_pos * entity_prevpos ;  //previous pos of the entities so that they don't go back 

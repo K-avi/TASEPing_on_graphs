@@ -6,13 +6,25 @@ done :
 
    - implemented entities 
 
+   - count how many guys move 
+
+   - implemented attack structure 
+
+   - implemented movement structure 
+
+   - attack function thing to update closed links
+
 
 pending : 
 
 C : 
 
-   - implement the attack fn (remove links)
-
+   
+   -> implement a function to load an attack structure from a file smtg like a csv 
+      -> I hate string parsing in C it's so fucking infuriating 
+      -> my next fucking personnal project will be a fucking string library in C 
+         I'll suffer once so that I'll never suffer again ffs 
+         
    - dump big traces that are easy to load and dump 
 
    - test stuff 
@@ -40,7 +52,7 @@ this sounds easier than WOG tbh
 
 questions avant de commencer a implementer comme un fou furieux : 
 
--> retirer des liens oui mais en ajouter ? 
+
 -> occupation du noeud oui mais savoir QUI est dessus ? 
 -> qcq les agents ? (bonne question tbh )
 

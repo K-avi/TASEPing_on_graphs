@@ -11,8 +11,6 @@ uint8_t init_entity_arr(S_ENT_ARR * arr, uint32_t size){
     */
     if(!arr){ report_err("init_entity_arr", ET_NULL); return ET_NULL;}
 
-    return ET_OK;
-
     arr->entity_curpos = (entity_pos*) calloc( size , sizeof(entity_pos));
     if(!arr->entity_curpos){ report_err("init_entity_arr", ET_MALLOC); return ET_MALLOC;}
 
@@ -23,7 +21,9 @@ uint8_t init_entity_arr(S_ENT_ARR * arr, uint32_t size){
     if(!arr->shuffled_indexes_arr){ report_err("init_entity_arr", ET_MALLOC); return ET_MALLOC;}
 
     for(uint32_t i = 0; i < size ; i++) arr->shuffled_indexes_arr[i] = i;
+    
     arr->nb_entities = size;
+    arr->moved_entities = 0; 
 
     return ET_OK;
 }//not tested; ok 

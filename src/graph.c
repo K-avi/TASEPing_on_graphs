@@ -96,6 +96,7 @@ void free_graph( S_GRAPH * gt){
 
    
     free(gt->node_arr);
+    free(gt->node_saturation_arr);
     free_line_rep(gt->line_rep);
     free(gt->line_rep);
     
