@@ -19,14 +19,18 @@ pending :
 
 C : 
 
+could put the attack arr in like a single array and have another arr 
+to say how long each one of em is 
+that would make a bunch of stuff simpler tbh 
+
+
+
    
    -> implement a function to load an attack structure from a file smtg like a csv 
       -> I hate string parsing in C it's so fucking infuriating 
       -> my next fucking personnal project will be a fucking string library in C 
          I'll suffer once so that I'll never suffer again ffs 
-         
-   - dump big traces that are easy to load and dump 
-
+    
    - test stuff 
 
    - implement the main 

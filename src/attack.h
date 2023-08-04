@@ -22,6 +22,11 @@ typedef struct{ //this structure is a simple way
     S_ATTACK_ARRAY * arr_attack_array; //array of attack arrays structure 
     
 }S_ATTACK_REP;
+//actually don't do it like so ; 
+//smarter to only have two arrays : 
+
+//one contaning every attack array ever and one w the size of each attack (index where it begins )
+
 
 
 void free_attack_rep( S_ATTACK_REP * attr);

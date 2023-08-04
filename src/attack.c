@@ -5,7 +5,9 @@
 #include <bits/types/FILE.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
 
 uint8_t init_attack_array(S_ATTACK_ARRAY * arr , uint32_t array_size){
@@ -133,7 +135,16 @@ uint8_t load_attack_rep(S_ATTACK_REP * arep , char * source_file){
     while (fgets(line, 65536,  source) && cpt < nb_attacks) {
         //first cut to retrieve the huuuh the size of the array thing ; 
         //then get the line indexes in an array then append this array to the arep 
+        char* end, *cur=line;
+        if(emptyLine(cur)) continue; // ignores empty lines
+        
         cpt++;
+
+        uint32_t attack_arr_size = (uint32_t) strtol(cur, &end, 10); //retrieves index
+        if(peek(end, ',') && cur!=end) cur=(++end);
+        else{  fclose(source);  report_err("load_attack_arep parse2", AREP_PARSE);return AREP_PARSE;}
+
+        uint32_t * cur_arr_attack = (uint32_t*) malloc(sizeof(uint32_t) * attack_arr_size);
     }
 
     fclose(source);
