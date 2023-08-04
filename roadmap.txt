@@ -1,5 +1,77 @@
 redesign of code structure count : 0 
 
+done : 
+
+   - graph implem (reused the one of wog )
+
+   - implemented entities 
+
+
+pending : 
+
+C : 
+
+   - implement the attack fn (remove links)
+
+   - dump big traces that are easy to load and dump 
+
+   - test stuff 
+
+   - implement the main 
+
+
+Python : 
+
+   - make script that turns the wog format of graph to the one I want and maps the wog links to these to make the attack function thing 
+      (hmmmmmmmmmmmmmm)
+
+   - dt analysis script (fuck me)
+
+
+Misc : 
+
+   - docu 
+   - gpl 
+   - cursewords
+
+this sounds easier than WOG tbh 
+
+
+
+questions avant de commencer a implementer comme un fou furieux : 
+
+-> retirer des liens oui mais en ajouter ? 
+-> occupation du noeud oui mais savoir QUI est dessus ? 
+-> qcq les agents ? (bonne question tbh )
+
+modèle envisagé : 
+
+rendre le programme "agnostique" au type de graphe (réutiliser le plus possible le code de wog) 
+priviliégier un changement du GRAPHE PASSE plutôt que du GRAPHE REPRESENTE
+
+graphe : similaire a wog en retirant / ajoutant / changeant les attributs de noeud/lien
+         attribut de noeud : 
+            -> attribut de nb gens max (dépend du degré et d'un coeff fixe, peut être stocké ou évalué pdt itérations )(une multiplication)
+            -> attribut nb gens courant mis à jour qd entrée / sortie 
+         attribut de lien : 
+            -> attaqué oui/non
+
+entitees : similaire a wog (nombre)
+         -> décisions : indépendantes de l'etat du graphe (déplacement propulsion rigolote)
+         -> statique si ne peut pas bouger 
+
+regle de mouvement : 
+         -> une seule règle de mouvement -> propuslsion bizarre 
+
+règle d'attaque : 
+         -> une "tactique d'attaque" par simulation 
+            -> fréquence 
+            -> liens attaqués à chaque changement d'attaque 
+               -> implique qu'on peut facilement remettre liens d'avant (remettre graphe à l'état 0 avant d'attaquer les liens)
+
+
+
+notes from a meeting I had a few days ago 
 TASEP : 
 
 french ewwww 
