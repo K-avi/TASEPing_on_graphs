@@ -36,7 +36,8 @@ char * str_flag(uint8_t flag){
   case ERR_FOPEN: return "can't open file"; 
   case F_FORMAT : return "invalid file format";
 
-  case AREP_PARSE : return "parsinf of attack file failed ; please check that the file is formatted correctly";
+  case AREP_PARSE : return "parsing of attack file failed ; please check that the file is formatted correctly";
+  case AREP_INDEX : return "index passed is higher than max index";
 
   default : return "unknown error ; how did you get here?\n";
   }
