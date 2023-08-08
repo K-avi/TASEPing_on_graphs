@@ -39,6 +39,9 @@ char * str_flag(uint8_t flag){
   case AREP_PARSE : return "parsing of attack file failed ; please check that the file is formatted correctly";
   case AREP_INDEX : return "index passed is higher than max index";
 
+  case ERRFLAG_INVALIDOPT : return "invalid option passed";
+  case ERRFLAG_INVALID_ARG : return "argument passed to program isn't recognised; please check the docs";
+
   default : return "unknown error ; how did you get here?\n";
   }
 }//ok

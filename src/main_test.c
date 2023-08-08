@@ -15,7 +15,7 @@ int main(){
     S_GRAPH g ; 
 
     load_graph(&g, "toy_graph.csv",  0, 2);
-    print_graph(&g, stdout);
+   // print_graph(&g, stdout);
 
     S_ENT_ARR e;
 
@@ -23,11 +23,9 @@ int main(){
 
     S_ATTACK_REP arep ; 
 
-    init_attack_rep(&arep, 5); 
-
-    uint32_t* i = malloc(15*sizeof(uint32_t));
+    load_attack_rep(&arep, "test_attack_arr.csv");
     
-    app_attack_rep(&arep, 15, i, 1, 0);
+    print_attack_rep(&arep, stdout);
 
 
     free_attack_rep(&arep);

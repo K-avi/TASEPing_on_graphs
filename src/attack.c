@@ -2,15 +2,6 @@
 #include "graph.h"
 #include "misc.h"
 #include "common.h"
-#include <bits/types/FILE.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-
-
-
 
 uint8_t init_attack_rep( S_ATTACK_REP * arep, uint32_t attack_array_size, uint32_t start_array_size){
     /**/
@@ -30,17 +21,16 @@ uint8_t init_attack_rep( S_ATTACK_REP * arep, uint32_t attack_array_size, uint32
     arep->cur_attack = 0;
 
     return AREP_OK;
-}//not tested; ok
+}//tested; ok
 
 void free_attack_rep( S_ATTACK_REP * arep){
     /**/
-
     if(!arep) return;
     
     if(arep->arr_attack_array) free(arep->arr_attack_array);
     if(arep->arr_start_of_attack_ite) free(arep->arr_start_of_attack_ite);
     if(arep->arr_start_attacks) free(arep->arr_start_attacks);
-}//not tested; ok 
+}//tested; ok 
 
 uint8_t app_attack_start_arep (S_ATTACK_REP * arep, uint32_t start_attack_index , uint32_t nb_lines_attacked, uint32_t *  first_line_ref){
     /*
@@ -50,22 +40,19 @@ uint8_t app_attack_start_arep (S_ATTACK_REP * arep, uint32_t start_attack_index 
     O(1)
     */
     if(!arep) { report_err("app_attack_start_arep", AREP_NULL); return AREP_NULL;}
-
     if( (arep->size_start_arrays - 1 < start_attack_index) ){ report_err("app_attack_start_arep", AREP_INDEX); return AREP_INDEX;}
 
     arep->arr_start_attacks[start_attack_index].ref_first_line_attacked = first_line_ref;
     arep->arr_start_attacks[start_attack_index].nb_lines_attacked = nb_lines_attacked;
 
     return AREP_OK;
-    
-}//not tested ; based on graph fn; prolly ok
+}//tested ; based on graph fn; prolly ok
 
 
 uint8_t app_attacked_line_arep( S_ATTACK_REP * arep , uint32_t array_index ,uint32_t line_index){
     /*
     appends ONE line to the line tab of a graph table ;
     checks for valid node 
-
     O(1)
     */
     if(!arep){ report_err("app_attacked_line_arep", AREP_NULL); return AREP_NULL;}
@@ -74,15 +61,15 @@ uint8_t app_attacked_line_arep( S_ATTACK_REP * arep , uint32_t array_index ,uint
    
     arep->arr_attack_array[array_index] = line_index;
 
-    return G_OK;
-}//not tested  ; prolly ok
+    return AREP_OK;
+}//tested  ; prolly ok
 //based on app_line function 
 //doesn't check that line_index is a valid index ; will check 
 //in the load function
 
 uint8_t update_attacked_links(S_GRAPH * g, S_ATTACK_REP * arep){
     /*updates the attacked links attribute of g with the next arep attack */
-    if(!g){report_err("updated_attacked_links", G_NULL); return G_NULL; }
+    if(!g){report_err("updated_attacked_links", AREP_NULL); return AREP_NULL; }
     if(!arep){report_err("update_attacked_links", AREP_NULL); return AREP_NULL; }
 
     S_ATTACK_START attack_start_infos = arep->arr_start_attacks[arep->cur_attack];
@@ -95,8 +82,7 @@ uint8_t update_attacked_links(S_GRAPH * g, S_ATTACK_REP * arep){
 
     arep->cur_attack++; 
     return AREP_OK;
-}//not tested; might be wrong 
-
+}//seems ok idk
 
 static  bool peek(const char * str, char expected){
     return *str==expected;
@@ -111,8 +97,6 @@ uint8_t load_attack_rep(S_ATTACK_REP * arep , char * source_file){
     /*
     loads an attack rep from a custom csv source file representing an 
     attack; will report a bunch of errors if it's wrong 
-
-
     very similar to the graph parse function 
     */
     if(!arep){ report_err("load_attack_arep",  AREP_NULL); return AREP_NULL;}
@@ -130,45 +114,109 @@ uint8_t load_attack_rep(S_ATTACK_REP * arep , char * source_file){
         return F_FORMAT;
     }
 
-    //parse the expected number of attacks and the size of the sum of the attack array 
     char * end1,*cur1=line;
-    uint32_t  start_array_size = (uint32_t) strtol(cur1, &end1, 10);
+    uint32_t  nb_attack_start = (uint32_t) strtol(cur1, &end1, 10);
     if(peek(end1, ',') && cur1!=end1) cur1=(++end1);
-    else{ fclose(source);  report_err("load_attack_rep parse1", AREP_PARSE); return AREP_PARSE; }
+    else{ fclose(source);  report_err("load_graph parse1", AREP_PARSE); return AREP_PARSE; }
     
-    uint32_t attack_array_size = (uint32_t) strtol(cur1, &end1, 10);
+    uint32_t tot_nb_attacked_lines = (uint32_t) strtol(cur1, &end1, 10);
    
     if(cur1!=end1) cur1=(++end1);
-    else{fclose(source); report_err("load_attack_arep parse2", AREP_PARSE); return AREP_PARSE;}
+    else{fclose(source); report_err("load_attack_rep parse2", AREP_PARSE); return AREP_PARSE;}
 
     //initialises graph with values consumed on the first line
-    uint8_t failure= init_attack_rep(arep, attack_array_size,  start_array_size);
-    if(failure) { fclose(source);  report_err("load_graph" ,failure); return failure;}
+    uint8_t failure= init_attack_rep(arep, tot_nb_attacked_lines, nb_attack_start);
+    if(failure) { fclose(source);  report_err("load_attack_rep" ,failure); return failure;}
 
-   
-    uint32_t cpt = 0 ; //check that the nb of attacks is the nb of lines in the file 
-    uint32_t nb_attacks = attack_array_size;
+    uint32_t cpt=0; 
+    uint32_t index_arr_start_attack = 0 ;
+    uint32_t index_arr_attacked_lines = 0; 
+    //keep track of nblines consumed ; report error if nbline consumed higher than counter
 
-    while (fgets(line, 65536,  source) && cpt < nb_attacks) {
+    while (fgets(line, 65536,  source) && cpt < nb_attack_start) {
         //first cut to retrieve the huuuh the size of the array thing ; 
         //then get the line indexes in an array then append this array to the arep 
         char* end, *cur=line;
         if(emptyLine(cur)) continue; // ignores empty lines
         
-        cpt++;
+        cpt++;  
 
-        
+        uint32_t nb_lines_attacked = (uint32_t) strtol(cur, &end, 10); //retrieves neighboor num
+        if(peek(end, ',') && cur!=end) cur=(++end);
+        else {  fclose(source);  report_err("load_attack_rep parse3", AREP_PARSE); return AREP_PARSE;}
 
-        
+        //appends node to the node section
+        uint8_t errflag= app_attack_start_arep(arep, index_arr_start_attack, nb_lines_attacked, &(arep->arr_attack_array[index_arr_attacked_lines]) );
+      
+        if(errflag) { report_err("load_attack_rep parse4", errflag); return  errflag; }
+
+        //loop to retrieve the indexes of the attacked lines 
+        //checks that the line exist
+        for(uint32_t i=0; i<nb_lines_attacked; i++){
+            /*
+            adds the lines
+            */
+            uint32_t line_attacked= (uint32_t) strtol(cur, &end, 10);
+
+            if(i!=nb_lines_attacked-1){
+                if(peek(end, ';') && cur!=end ) cur=(++end);
+                else {
+                    fclose(source); 
+                    fprintf(stderr,"at line :%s %s\n", line, cur);
+                    report_err("load_attack_rep parse5", AREP_PARSE);
+                    return AREP_PARSE;
+                }
+            }else{
+                if( cur==end){
+                    fclose(source);
+                    fprintf(stderr,"at line :%s\n", line);
+                    report_err("load_attack_rep parse6", AREP_PARSE);
+                    return AREP_PARSE; 
+                }
+            }
+
+            uint8_t errflag_in = app_attacked_line_arep(arep, index_arr_attacked_lines++, line_attacked);
+            if(errflag_in ){report_err("load_attack_rep parse7", errflag_in); return errflag_in;}
+            
+        }
+        index_arr_start_attack++;
     }
 
     fclose(source);
     return AREP_OK; 
-}//not done
+}//tested; seems ok
+
+uint8_t print_attack_rep(S_ATTACK_REP * arep, FILE * stream){
+    /* wrapper around the write function*/
+   /*self explainatory*/
+    if(!arep){report_err("write_attack_rep", AREP_NULL); return AREP_NULL;}
+    if(!stream){report_err("write_attack_rep", ERR_NULL); return ERR_NULL;}
+    fprintf(stream, "%u,%u\n", arep->size_start_arrays, arep->size_attack_array);
+    for(uint32_t i = 0 ; i < arep->size_start_arrays; i++){
+
+        fprintf(stream, "%u,", arep->arr_start_attacks[i].nb_lines_attacked);
+        for(uint32_t j = 0 ; j < arep->arr_start_attacks[i].nb_lines_attacked; j++){
+            if(j == arep->arr_start_attacks[i].nb_lines_attacked -1 ){
+                fprintf(stream, "%u", arep->arr_start_attacks[i].ref_first_line_attacked[j]);
+            }else{
+    
+                fprintf(stream, "%u;", arep->arr_start_attacks[i].ref_first_line_attacked[j]);
+            }
+        }
+        fprintf(stream, "\n");
+    }
+  
+    return AREP_OK; 
+}// tested; seems ok
 
 uint8_t write_attack_rep(S_ATTACK_REP * arep , char * dest_file){
-    /*self explainatory*/
+    /*wrapper around the print fn*/
+    FILE * f = fopen("dest_file", "w");
+    if(!f){report_err("write_attack_rep", ERR_FOPEN ); return ERR_FOPEN;}
+    uint8_t failure = print_attack_rep(arep, f);
+    fclose(f);
 
-    return AREP_OK;
-}//not done
+    if(failure){ report_err("write_attack_rep", failure); return failure;}
 
+    return failure; 
+}//tested ; ok 

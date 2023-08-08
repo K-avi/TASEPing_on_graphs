@@ -19,7 +19,7 @@ static uint8_t prepare_ite(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * are
     SHUFFLE_ARR_INDEX(entities);
     g->curgen++;
 
-    if(g->curgen == arep->arr_attack_ite[arep->cur_attack]){//updates blocked link attributes 
+    if(g->curgen == arep->arr_start_of_attack_ite[arep->cur_attack]){//updates blocked link attributes 
         update_attacked_links(g, arep);
     }
     

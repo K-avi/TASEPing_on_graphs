@@ -14,26 +14,23 @@ done :
 
    - attack function thing to update closed links
 
+   - implemented the load attack function ; the program can now be 
+     tested yay! 
+
 
 pending : 
 
 C : 
 
-could put the attack arr in like a single array and have another arr 
-to say how long each one of em is 
-that would make a bunch of stuff simpler tbh 
-
-
-
-   
-   -> implement a function to load an attack structure from a file smtg like a csv 
-      -> I hate string parsing in C it's so fucking infuriating 
-      -> my next fucking personnal project will be a fucking string library in C 
-         I'll suffer once so that I'll never suffer again ffs 
-    
-   - test stuff 
-
    - implement the main 
+
+   - add a lil helper thing that takes the nb of it and the nb of attacks and divide and inits the 
+     array w the index of the attack start this way 
+     
+     if y have a sim of 100 steps and 10 attacks I attack at iteration 0 
+     iteration 10 ,....
+
+   - test stuff 
 
 
 Python : 
@@ -46,7 +43,7 @@ Python :
 
 Misc : 
 
-   - docu 
+   - docs
    - gpl 
    - cursewords
 

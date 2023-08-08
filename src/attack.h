@@ -33,10 +33,12 @@ typedef struct{ //this structure is a simple way
 
 
 
-void free_attack_rep( S_ATTACK_REP * attr);
+void free_attack_rep( S_ATTACK_REP * arep);
 
 uint8_t load_attack_rep(S_ATTACK_REP * arep , char * source_file);
 uint8_t write_attack_rep(S_ATTACK_REP * arep , char * dest_file);
+
+uint8_t print_attack_rep(S_ATTACK_REP * arep , FILE * stream);
 
 uint8_t update_attacked_links(S_GRAPH * g, S_ATTACK_REP * arep);
 
