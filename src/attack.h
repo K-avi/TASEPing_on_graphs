@@ -42,6 +42,10 @@ uint8_t print_attack_rep(S_ATTACK_REP * arep , FILE * stream);
 
 uint8_t update_attacked_links(S_GRAPH * g, S_ATTACK_REP * arep);
 
+//only call in main
+uint8_t check_validity(S_ATTACK_REP * arep , S_GRAPH * g);
+uint8_t set_attack_start( S_ATTACK_REP * arep , uint32_t nb_iterations, uint32_t start );
+
 #ifdef debug_mode 
 
 

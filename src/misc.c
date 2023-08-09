@@ -31,6 +31,7 @@ char * str_flag(uint8_t flag){
 
   case AREP_NULL :  return "attack rep struct pointer is NULL";
   case AREP_MALLOC : return "couldn't allocate memory for the array of attack array";
+  case AREP_INVALID : return "the attack file isn't compatible with the graph";
 
   case ERR_NULL: return "NULL pointer caught";
   case ERR_FOPEN: return "can't open file"; 

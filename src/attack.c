@@ -2,6 +2,8 @@
 #include "graph.h"
 #include "misc.h"
 #include "common.h"
+#include <stdint.h>
+#include <stdio.h>
 
 uint8_t init_attack_rep( S_ATTACK_REP * arep, uint32_t attack_array_size, uint32_t start_array_size){
     /**/
@@ -220,3 +222,53 @@ uint8_t write_attack_rep(S_ATTACK_REP * arep , char * dest_file){
 
     return failure; 
 }//tested ; ok 
+
+
+uint8_t check_validity(S_ATTACK_REP * arep , S_GRAPH * g){
+    /* 
+    checks that the lines in an arep aren't superior to the last 
+    line of a graph g 
+    */
+    if(!arep){report_err("check_validity", AREP_NULL); return AREP_NULL;}
+    if(!g){report_err("check_validity", G_NULL); return G_NULL;}
+
+    for(uint32_t i = 0; i < arep->size_attack_array; i++){
+        if(arep->arr_attack_array[i] > g->line_rep->cur_in){
+            
+            report_err("check_validity", AREP_INVALID);
+            fprintf(stderr, "line %u at index %u is higher than nb of lines in the graph %u\n", arep->arr_attack_array[i],i,g->line_rep->cur_in);
+            return AREP_INVALID;
+        }
+    }
+    return AREP_OK;;
+}//not tested
+
+uint8_t set_attack_start( S_ATTACK_REP * arep , uint32_t nb_iterations, uint32_t start ){
+    /*
+    sets the start of each attack to match a certain number of iterations 
+    the goal is to equally disribute attacks for a sim of nb_ite steps. 
+
+    atm it's very simple and silly ; it just starts an attack every n step where n 
+    is nb_ite / nb_attack 
+    it can be offset w a start 
+    */
+    if(!arep){ report_err("set_attack_start", AREP_NULL); return AREP_NULL;}
+
+    uint32_t nb_attacks = arep->size_start_arrays ; 
+    uint32_t div = nb_iterations - start / nb_attacks;
+
+    uint64_t sum = start ;
+
+    if(nb_iterations <= nb_attacks){//silly cases but heh 
+        for (uint32_t i = 0 ; i < nb_attacks; i++){
+            arep->arr_start_of_attack_ite[i] = i ;
+        }
+    }else{
+        for (uint32_t i = 0 ; i < nb_attacks; i++){
+            arep->arr_start_of_attack_ite[i] = sum ;
+            sum += div; 
+        }
+    }
+
+    return AREP_OK;
+}//not tested

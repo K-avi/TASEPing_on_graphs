@@ -17,28 +17,24 @@ done :
    - implemented the load attack function ; the program can now be 
      tested yay! 
 
+    implement the main 
+
+   - add a lil helper thing that takes the nb of it and the nb of attacks and divide and inits the 
+     array w the index of the attack start this way 
+
 
 pending : 
 
 C : 
 
-   - implement the main 
-
-   - add a lil helper thing that takes the nb of it and the nb of attacks and divide and inits the 
-     array w the index of the attack start this way 
-     
-     if y have a sim of 100 steps and 10 attacks I attack at iteration 0 
-     iteration 10 ,....
-
-   - test stuff 
+   - test the program ffs
 
 
 Python : 
 
    - make script that turns the wog format of graph to the one I want and maps the wog links to these to make the attack function thing 
       (hmmmmmmmmmmmmmm)
-
-   - dt analysis script (fuck me)
+   - make script that produces random attack function 
 
 
 Misc : 
@@ -48,72 +44,3 @@ Misc :
    - cursewords
 
 this sounds easier than WOG tbh 
-
-
-
-questions avant de commencer a implementer comme un fou furieux : 
-
-
--> occupation du noeud oui mais savoir QUI est dessus ? 
--> qcq les agents ? (bonne question tbh )
-
-modèle envisagé : 
-
-rendre le programme "agnostique" au type de graphe (réutiliser le plus possible le code de wog) 
-priviliégier un changement du GRAPHE PASSE plutôt que du GRAPHE REPRESENTE
-
-graphe : similaire a wog en retirant / ajoutant / changeant les attributs de noeud/lien
-         attribut de noeud : 
-            -> attribut de nb gens max (dépend du degré et d'un coeff fixe, peut être stocké ou évalué pdt itérations )(une multiplication)
-            -> attribut nb gens courant mis à jour qd entrée / sortie 
-         attribut de lien : 
-            -> attaqué oui/non
-
-entitees : similaire a wog (nombre)
-         -> décisions : indépendantes de l'etat du graphe (déplacement propulsion rigolote)
-         -> statique si ne peut pas bouger 
-
-regle de mouvement : 
-         -> une seule règle de mouvement -> propuslsion bizarre 
-
-règle d'attaque : 
-         -> une "tactique d'attaque" par simulation 
-            -> fréquence 
-            -> liens attaqués à chaque changement d'attaque 
-               -> implique qu'on peut facilement remettre liens d'avant (remettre graphe à l'état 0 avant d'attaquer les liens)
-
-
-
-notes from a meeting I had a few days ago 
-TASEP : 
-
-french ewwww 
-
--> initialement pr modéliser congestion de traffic 
-
--> proba sortir / entrer sur un oeud 
-
--> bouge qd pas saturé 
-
--> après certain nombre mvmt -> atteint équilibre ; 
-
--> qd attaque -> enlève lien dc perturbation déplacement 
-   transition avt atteindre un nvl équilibre 
-
--> idée ici : ne pas faire une attaque ; mais en faire 
-   plusieurs l'une après l'autre pr continuellement perturber l'état de déplacement
-
--> avoir modèle sur la ville + fonctions d'attaques 
-
-fonction d'attaque : 
-
--> nb lien à enlever 
--> fréquence enlève 
-
-ex : 
-
-attaque aléatoire 
-
-ex 1000 ; fq 2 
-
-tt les 2 tours ; enlève 1000 lien (remets ceux d'avant)
