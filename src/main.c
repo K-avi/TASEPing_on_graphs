@@ -7,10 +7,18 @@
 #include "movement.h"
 #include "rules.h"
 #include <stdint.h>
+#include <stdio.h>
+#include <time.h>
 
 
 int main(int argc , char ** argv){
     
+
+    time_t t;
+    time(&t); 
+
+    srand(t);
+
     int8_t c; 
     uint8_t hflag = 0, saturation_coeff = 1, optcount = 0 ; //add option for the saturation coeff 
     uint32_t first_attack_it = 0; 
@@ -108,6 +116,8 @@ int main(int argc , char ** argv){
     //inits entities
     S_ENT_ARR entities;
     failure = init_entity_arr(&entities, (uint32_t)((double)g.nb_nodes*(double)coeff_ent));
+    
+
     if(failure){ report_err("in main init_entity_arr", failure); return failure;}
 
     //checks that the lines in the arep match the lines in the graph

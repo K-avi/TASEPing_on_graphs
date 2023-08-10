@@ -22,6 +22,10 @@ done :
    - add a lil helper thing that takes the nb of it and the nb of attacks and divide and inits the 
      array w the index of the attack start this way 
 
+   - tog discr function was actually really ez 
+
+   - make script that produces random attack function 
+
 
 pending : 
 
@@ -32,19 +36,12 @@ C :
 
 Python : 
 
-   - make script that turns the wog format of graph to the one I want and maps the wog links to these to make the attack function thing 
-      (hmmmmmmmmmmmmmm)
+  
 
-   - make script that produces random attack function (no)
-   - make a script that LOADS the attack function 
+   
+   - make a script that LOADS the attack function from WOG flux trace 
 
       - need to match the hmmm the of lines in a dict this should be "ok"
-
-   - take a graph ; for every path of degree two nodes
-      between (a,b)  and d(a) >= 2, d(b) >=2 
-      add as many nodes as the path length ; add links a -> b like this 
-      remove links b <- a 
-      nb : fuck this
 
 Misc : 
 
@@ -53,27 +50,6 @@ Misc :
    - cursewords
 
 
-
-me having a terrible idea in french for 10 lines : 
-
-une manière moins stupide de faire c genre de transformer le graphe en graphe dirigié DIRECt en ensuite de supprimer des trucs 
-mtn la question c'est quoi comment supprimer. 
-
-L'idée cv être de lister les chemins NON DIRIGES tq 
- -> qd je genère les chemins il faut vérifier que genre hmmm si j'ai un chemin qui commence par ni il existe pas de chemin
- qui finisse par ni 
-
-qzriogqeiojjisejoiejiosrgjioqsgjioqeomijgvwmdgq*fpqfmw*sdcm$<sms$*fgvmqed*ĝl mon avis sur la question. 
-
-n0 , n1, ... ni ET d(n0) > 2 , d(ni)>2 et pour tout n1,...ni-1 d(n) = 2 
-
-à partir de là ; pour chacun de ces chemins 
--> enlever les liens n0 -> ni 
-
-ajouter autant de noeuds que la longueur du chemin au graphe 
-ajouter des liens de n0 vers ni
-
------------------------------------------
 
 So I failed miserably at enumerating the pathes and I'm mad now. 
 I'll try the other solution : 
@@ -88,5 +64,7 @@ to keep track of the line's labels
 
 but this should be the easy part 
 
-The thing I'm unsure about is the discretisation function from OSMNx to a TOG compatible 
-graph 
+
+---------------------- 
+
+The whole interfacing programs together is paused atm cuz I'll test the actual C program lol 

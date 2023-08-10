@@ -5,9 +5,27 @@
 #include "graph.h"
 #include "misc.h"
 #include "rules.h"
-#include <stdint.h>
-#include <stdio.h>
 
+
+
+static uint8_t init_positions(S_ENT_ARR * entities, uint32_t graph_size){
+    /*
+    oops i forgor so everyone is on the 0
+
+    normal rand distribution of the entities 
+    */
+    if(!entities){report_err("init_entity_pos", ET_NULL); return ET_NULL;}
+
+    for(uint32_t i = 0; i < entities->nb_entities ; i ++){
+        
+        uint32_t index = rand()%graph_size; 
+
+        entities->entity_curpos[i] = index; 
+        entities->entity_prevpos[i] = index;
+    }
+
+    return ET_OK;
+}
 
 static uint8_t prepare_ite(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * arep){
     /*updates fields relevant to the iterations before they actually take place*/
@@ -29,13 +47,18 @@ static uint8_t prepare_ite(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * are
 
 static uint8_t iterate_once(S_GRAPH * g , S_ENT_ARR * entities){
     /*pretty simple tbh*/
-    if(!g){report_err("iterate_once",  G_NULL); return G_NULL;}
-    if(!entities){report_err("iterate_once", ET_NULL); return ET_NULL;}
+    if(!g){report_err("iterate_once 1st check",  G_NULL); return G_NULL;}
+    if(!entities){report_err("iterate_once 2nd check", ET_NULL); return ET_NULL;}
     uint8_t failure;
+    
     for(uint32_t i = 0 ; i < entities->nb_entities; i++){
+        
+      //  printf("%u et curpos %u et index %u\n", i,  entities->entity_curpos[entities->shuffled_indexes_arr[i]],
+    //                 entities->shuffled_indexes_arr[i]);
+
         failure = rule_tasep(g, entities, entities->entity_curpos[entities->shuffled_indexes_arr[i]],
                      entities->shuffled_indexes_arr[i]);
-        if(failure){ report_err("iterate_once", failure); return failure;}
+        if(failure){ report_err("iterate_once 3rd check", failure); return failure;}
     }
 
     return IT_OK;
@@ -48,21 +71,24 @@ uint8_t iterate_ntimes(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * arep , 
     if(!entities){report_err("iterate_ntimes", ET_NULL); return ET_NULL;}
     if(!arep){report_err("iterate_ntimes", AREP_NULL); return AREP_NULL; } 
 
-    uint8_t failure; 
+    uint8_t failure = init_positions(entities, g->nb_nodes);
+    if(failure){report_err("iterate_ntimes", failure); return failure;}
+
     FILE * f = fopen(fname, "w");
 
     for(uint32_t i = 0; i < nb_it; i++){
         failure = prepare_ite(g, entities, arep);
         if(failure){report_err("iterate_ntimes", failure); return failure;}
         
-        //movement thing 
-        fprintf(f, "%u\n", entities->moved_entities);
 
         failure = iterate_once(g, entities);
         if(failure){report_err("iterate_ntimes", failure); return failure;}
+        
+        //movement thing 
+        fprintf(f, "%u\n", entities->moved_entities);
     }
 
     fclose(f);
 
     return IT_OK;
-}//not done 
+}//tested; kinda ok ; theres a problem somewhere though

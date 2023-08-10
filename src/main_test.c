@@ -10,11 +10,11 @@
 
 
 int main(){ 
-    printf("I am in fact NOT a real main\n"); 
     
+
     S_GRAPH g ; 
 
-    load_graph(&g, "paris_final_gendown.csv",  0, 2);
+    load_graph(&g, "test_tog.csv",  0, 2);
    // print_graph(&g, stdout);
 
     S_ENT_ARR e;
@@ -23,8 +23,7 @@ int main(){
 
     S_ATTACK_REP arep ; 
 
-    load_attack_rep(&arep, "test_attack_arr.csv");
-    
+    load_attack_rep(&arep, "test_attack_arr.csv"); 
     print_attack_rep(&arep, stdout);
 
 
