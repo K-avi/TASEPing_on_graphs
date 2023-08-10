@@ -55,7 +55,7 @@ uint8_t iterate_ntimes(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * arep , 
         failure = prepare_ite(g, entities, arep);
         if(failure){report_err("iterate_ntimes", failure); return failure;}
         
-        //flags thing 
+        //movement thing 
         fprintf(f, "%u\n", entities->moved_entities);
 
         failure = iterate_once(g, entities);

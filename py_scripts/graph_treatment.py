@@ -164,28 +164,72 @@ def get_pathes(g):
             cpt+=1 
     print(cpt)  
     return pathes
-#not tested ; prolly slow af 
+#completely wrong ; what a waste of time and kilobytes 
 #"naive" algorithm prolly better way to do it 
 #implementation of the alg might also be awful 
 
-def convert_graph(g): 
-    """
-    nx.Graph -> treated nx.DiGraph 
-    converts and turns g into a DiGraph, 
-    changes the topology of the graph to match 
-    the graph I want to use in the C 
-    TOG program
-    """
-    
-    g = nx.DiGraph(g)#what a conversion ! 
-    
-#not done
 
+
+
+def discretise_tog(g,step): 
+    """
+    nx.Graph w the lil length attribute on the lines -> beeg boy nx.graph
+    """
+    
+    gret = nx.DiGraph()
+    nb_nodes = g.number_of_nodes()
+    nb_edges = g.number_of_edges()
+    
+    
+    for a,b,length in g.edges(data="length") : 
+            
+            ns = int(float(length)/step)
+            
+            new_ed = [ a, *list(range( nb_nodes, nb_nodes + ns )), b]
+            nx.add_path(gret, new_ed)
+            nb_nodes += ns
+            
+            new_ed = [b , *list(range(nb_nodes , nb_nodes+ns)),a]
+            nx.add_path(gret, new_ed)
+            nb_nodes += ns
+            
+            nb_edges += 2*ns
+    return gret
+    
+
+
+# I'll see about the huuuuh matching lines thingy later 
+# maybe I can do it in a clever way, even if I can 
+# and I prolly can , I won't atm 
+
+def makeCSV(Graph, path):
+    """
+    nxGraph , path -> custom csv graph file 
+    writes the custom csv corresponding to the graph passed
+    as argument in the file at path
+    """ 
+    with open (path, "w") as file: 
+     
+        file.write(f"{Graph.number_of_nodes()},{Graph.number_of_edges()}\n") #2 times nb of edges cuz need (a,b) and (b,a)
+        for i in Graph:
+         
+            file.write(f'{i},{Graph.out_degree(i)},{":0;".join( str(i) for i in Graph.neighbors(i))+":0"}\n')
+    file.close
+
+
+#test area 
 import graph_convert as gc 
+import osmnx as ox 
+g = ox.graph_from_place("paris", network_type="drive")
+g = nx.Graph(g)
+g.remove_edges_from(nx.selfloop_edges(g) )
 
-g = gc.wog_to_nx("paris_final_gendown.csv")
+g = nx.k_core(g,2)
+s = max(nx.connected_components(g))
 
+g.remove_nodes_from([ i for i in g.nodes() if not i in s ])
 
-l = get_pathes(g)
+dg = discretise_tog(g,10)
+dg = nx.convert_node_labels_to_integers(dg, 0)
 
-pathes,cur,parent,child, visited_path, visited_edges = l   
+makeCSV(dg,"test.csv")

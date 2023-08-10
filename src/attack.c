@@ -186,7 +186,8 @@ uint8_t load_attack_rep(S_ATTACK_REP * arep , char * source_file){
 
     fclose(source);
     return AREP_OK; 
-}//tested; seems ok
+}//tested; seems ok 
+//very messy function ; variable names are shit; watch out 
 
 uint8_t print_attack_rep(S_ATTACK_REP * arep, FILE * stream){
     /* wrapper around the write function*/

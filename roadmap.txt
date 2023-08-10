@@ -35,15 +35,26 @@ Python :
    - make script that turns the wog format of graph to the one I want and maps the wog links to these to make the attack function thing 
       (hmmmmmmmmmmmmmm)
 
-   - make script that produces random attack function 
+   - make script that produces random attack function (no)
    - make a script that LOADS the attack function 
 
       - need to match the hmmm the of lines in a dict this should be "ok"
+
    - take a graph ; for every path of degree two nodes
       between (a,b)  and d(a) >= 2, d(b) >=2 
       add as many nodes as the path length ; add links a -> b like this 
       remove links b <- a 
+      nb : fuck this
 
+Misc : 
+
+   - docs
+   - gpl 
+   - cursewords
+
+
+
+me having a terrible idea in french for 10 lines : 
 
 une manière moins stupide de faire c genre de transformer le graphe en graphe dirigié DIRECt en ensuite de supprimer des trucs 
 mtn la question c'est quoi comment supprimer. 
@@ -62,12 +73,20 @@ n0 , n1, ... ni ET d(n0) > 2 , d(ni)>2 et pour tout n1,...ni-1 d(n) = 2
 ajouter autant de noeuds que la longueur du chemin au graphe 
 ajouter des liens de n0 vers ni
 
+-----------------------------------------
+
+So I failed miserably at enumerating the pathes and I'm mad now. 
+I'll try the other solution : 
+
+treating the OSMNx non discretised graph for WOG and TOG in parallel; I think this SHOULD be easier. 
+I'll have to write som dict thing like 
 
 
-Misc : 
+wog C index -> wog python index -> tog python index -> tog c index   
 
-   - docs
-   - gpl 
-   - cursewords
+to keep track of the line's labels
 
-this sounds easier than WOG tbh 
+but this should be the easy part 
+
+The thing I'm unsure about is the discretisation function from OSMNx to a TOG compatible 
+graph 
