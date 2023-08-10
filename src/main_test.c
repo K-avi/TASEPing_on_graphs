@@ -14,7 +14,7 @@ int main(){
     
     S_GRAPH g ; 
 
-    load_graph(&g, "toy_graph.csv",  0, 2);
+    load_graph(&g, "paris_final_gendown.csv",  0, 2);
    // print_graph(&g, stdout);
 
     S_ENT_ARR e;

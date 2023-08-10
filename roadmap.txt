@@ -34,7 +34,34 @@ Python :
 
    - make script that turns the wog format of graph to the one I want and maps the wog links to these to make the attack function thing 
       (hmmmmmmmmmmmmmm)
+
    - make script that produces random attack function 
+   - make a script that LOADS the attack function 
+
+      - need to match the hmmm the of lines in a dict this should be "ok"
+   - take a graph ; for every path of degree two nodes
+      between (a,b)  and d(a) >= 2, d(b) >=2 
+      add as many nodes as the path length ; add links a -> b like this 
+      remove links b <- a 
+
+
+une manière moins stupide de faire c genre de transformer le graphe en graphe dirigié DIRECt en ensuite de supprimer des trucs 
+mtn la question c'est quoi comment supprimer. 
+
+L'idée cv être de lister les chemins NON DIRIGES tq 
+ -> qd je genère les chemins il faut vérifier que genre hmmm si j'ai un chemin qui commence par ni il existe pas de chemin
+ qui finisse par ni 
+
+qzriogqeiojjisejoiejiosrgjioqsgjioqeomijgvwmdgq*fpqfmw*sdcm$<sms$*fgvmqed*ĝl mon avis sur la question. 
+
+n0 , n1, ... ni ET d(n0) > 2 , d(ni)>2 et pour tout n1,...ni-1 d(n) = 2 
+
+à partir de là ; pour chacun de ces chemins 
+-> enlever les liens n0 -> ni 
+
+ajouter autant de noeuds que la longueur du chemin au graphe 
+ajouter des liens de n0 vers ni
+
 
 
 Misc : 
