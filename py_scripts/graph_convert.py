@@ -82,3 +82,6 @@ def wog_to_tog(path):
     """
     
     return 0
+
+g = wog_to_tog("paris_final_gendown.csv")
+

@@ -95,7 +95,7 @@ int main(int argc , char ** argv){
     //parses coeff of entities
     end = argv[5+optcount];
     double coeff_ent = (double) strtod( argv[5+optcount], &end );
- 
+
     if(end== argv[5+optcount]){
         fprintf(stderr, "usage : ./taseping_on_graphs path/of/graph path/of/attack output/file \
         iteration_num coeff_entities\n\
@@ -117,7 +117,7 @@ int main(int argc , char ** argv){
     S_ENT_ARR entities;
     failure = init_entity_arr(&entities, (uint32_t)((double)g.nb_nodes*(double)coeff_ent));
     
-
+    //printf("nb ett %u\n", (uint32_t)((double)g.nb_nodes*(double)coeff_ent) );
     if(failure){ report_err("in main init_entity_arr", failure); return failure;}
 
     //checks that the lines in the arep match the lines in the graph

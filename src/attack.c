@@ -77,7 +77,7 @@ uint8_t update_attacked_links(S_GRAPH * g, S_ATTACK_REP * arep){
     S_ATTACK_START attack_start_infos = arep->arr_start_attacks[arep->cur_attack];
 
     memset(g->line_rep->blocked_arr, 0, g->line_rep->size * sizeof(uint8_t)); //resets every line attack attribute
-
+    //printf("nb lines attacked %u \n ", attack_start_infos.nb_lines_attacked);
     for(uint32_t i = 0; i<attack_start_infos.nb_lines_attacked; i++){
         g->line_rep->blocked_arr[attack_start_infos.ref_first_line_attacked[i]] = 1; //sets the new attacked line attribute to 1
     }

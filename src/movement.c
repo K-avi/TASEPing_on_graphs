@@ -22,6 +22,7 @@ static uint8_t init_positions(S_ENT_ARR * entities, uint32_t graph_size){
 
         entities->entity_curpos[i] = index; 
         entities->entity_prevpos[i] = index;
+       //printf("%u %u\n", i, index);
     }
 
     return ET_OK;

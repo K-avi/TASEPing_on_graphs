@@ -25,8 +25,8 @@ uint8_t rule_tasep(S_GRAPH * g , S_ENT_ARR * ent_arr, uint32_t node_from , uint3
 
           
             uint32_t cur_neighbor_index = cur_line->node_index;
-            
-        
+
+            //printf("weird shit %u %lu \n", (g->node_saturation_arr[cur_neighbor_index]) , (g->saturation_coeff * g->node_arr[cur_neighbor_index].neighboor_num));
             if( (g->node_saturation_arr[cur_neighbor_index] < (g->saturation_coeff * g->node_arr[cur_neighbor_index].neighboor_num) )
                 && (cur_neighbor_index != ent_arr->entity_prevpos[entity_index]) ){
              
@@ -41,7 +41,8 @@ uint8_t rule_tasep(S_GRAPH * g , S_ENT_ARR * ent_arr, uint32_t node_from , uint3
 
     if(cur_in_nta){//if there is at least one node in the target nodes array
 
-        g->node_saturation_arr[node_from]--; //entity will get out of it's cur node
+        if (g->node_saturation_arr[node_from])
+            g->node_saturation_arr[node_from]--; //entity will get out of it's cur node
 
         uint32_t node_to_index = nodes_to_arr[rand()%cur_in_nta]; //chooses a random node from nodes_to_arr
 
