@@ -5,6 +5,7 @@
 #include "graph.h"
 #include "misc.h"
 #include "rules.h"
+#include <stdint.h>
 
 
 
@@ -25,7 +26,22 @@ static uint8_t init_positions(S_ENT_ARR * entities, uint32_t graph_size){
        //printf("%u %u\n", i, index);
     }
 
+    
     return ET_OK;
+}
+
+static uint8_t init_node_sat_arr( S_ENT_ARR * entities , S_GRAPH * g){
+    /*
+    inits the nb entities on a node ; only call before iterating 
+    */
+    if(! entities){ report_err("init_node_sat_arr", ET_NULL); return ET_NULL;}
+    if(! g){report_err("init_node_sat_arr", ET_NULL); return G_NULL;}
+
+    for(uint32_t i = 0; i < entities->nb_entities ; i ++){       
+         g->node_saturation_arr[entities->entity_curpos[i]]++; //updates saturation of this node
+    }
+
+    return G_OK;
 }
 
 static uint8_t prepare_ite(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * arep){
@@ -73,6 +89,9 @@ uint8_t iterate_ntimes(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * arep , 
     if(!arep){report_err("iterate_ntimes", AREP_NULL); return AREP_NULL; } 
 
     uint8_t failure = init_positions(entities, g->nb_nodes);
+    if(failure){report_err("iterate_ntimes", failure); return failure;}
+
+    failure = init_node_sat_arr(entities, g); 
     if(failure){report_err("iterate_ntimes", failure); return failure;}
 
     FILE * f = fopen(fname, "w");
