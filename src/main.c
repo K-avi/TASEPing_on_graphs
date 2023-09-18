@@ -63,15 +63,13 @@ int main(int argc , char ** argv){
     }
 
     if(hflag){ //prints help
-        fprintf(stdout, "usage : ./taseping_on_graphs path/of/graph path/of/attack output/file \
-        iteration_num coeff_entities\n \
+        fprintf(stdout, "usage : ./taseping_on_graphs [path of graph]  [path of attack] [output file] iteration_num coeff_entities\n \
         check out the docs directory for more informations\n");
         return 0;
     }
 
     if(argc < 6){ //checks that the number of args is ok
-        fprintf(stderr, "usage : ./taseping_on_graphs path/of/graph path/of/attack output/file \
-        iteration_num coeff_entities\n\
+        fprintf(stderr, "usage : ./taseping_on_graphs [path of graph]  [path of attack] [output file] iteration_num coeff_entities\n \
         check out the docs directory for more informations\n");
         return ERRFLAG_NOFILE;
     }
@@ -86,8 +84,7 @@ int main(int argc , char ** argv){
     uint32_t iteration_num = (uint32_t ) strtol( argv[4+optcount], &end , 10);
  
     if(end== argv[4+optcount]){
-        fprintf(stderr, "usage : ./taseping_on_graphs path/of/graph path/of/attack output/file \
-        iteration_num coeff_entities\n\
+        fprintf(stderr, "usage : ./taseping_on_graphs [path of graph]  [path of attack] [output file] iteration_num coeff_entities\n\
         check out the docs directory for more informations\n");
         return ERRFLAG_INVALID_ARG;
     }
@@ -97,8 +94,7 @@ int main(int argc , char ** argv){
     double coeff_ent = (double) strtod( argv[5+optcount], &end );
 
     if(end== argv[5+optcount]){
-        fprintf(stderr, "usage : ./taseping_on_graphs path/of/graph path/of/attack output/file \
-        iteration_num coeff_entities\n\
+        fprintf(stderr, "usage : ./taseping_on_graphs [path of graph]  [path of attack] [output file] iteration_num coeff_entities\n\
         check out the docs directory for more informations\n");
         return ERRFLAG_INVALID_ARG;
     }

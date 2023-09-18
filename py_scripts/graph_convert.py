@@ -74,14 +74,4 @@ def wog_to_dict(path):
                 g[a] = edges_to
     return g
 
-def wog_to_tog(path): 
-    """
-    turns the graph at path into 
-    a csv graph for TOG and does 
-    the treatment thing 
-    """
-    
-    return 0
-
 g = wog_to_tog("paris_final_gendown.csv")
-

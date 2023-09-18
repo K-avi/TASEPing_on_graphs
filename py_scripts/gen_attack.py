@@ -22,6 +22,12 @@ def write_attack(raa,fname):
         file.write(f"{len(raa)},{sum([len(i) for i in raa])}\n")
         for i in raa: 
             file.write(f'{len(i)},{";".join( [str(j) for j in i])}\n')
+            
+def attack_from_wog(fname):
+    """
+    """
+    
+    return 0
         
    
     
