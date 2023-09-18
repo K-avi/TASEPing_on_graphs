@@ -1,7 +1,13 @@
-sir a second internship repo has hit the github page 
+a second internship repo has hit the github page 
 
-The goal of it's repo is to use the time left in my internship (and my spare time) to implement 
-a TASEP based model of stuff moving on city graph. 
+The goal of this repo is to implement 
+a TASEP based model of entities moving on a city graph. 
 
-Once this is doen I'll make it interact with the walking_on_graphs project in order to create perturbation on the graph 
-based on where the WOG walkers are. I'll then study these perturbations and so on 
+To make things more interresting, I'll then make perturbations 
+on the graph by breaking links during the simulation. 
+I'll then study how it impacts the simulations. 
+
+
+Once this is done I'll make it interact with the walking_on_graphs project in order
+to create perturbation on the graph based on where the WOG walkers are.
+I'll then study these perturbations and so on 
