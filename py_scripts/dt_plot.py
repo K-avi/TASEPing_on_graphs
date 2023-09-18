@@ -19,12 +19,13 @@ def plotdir(dirpath, sim_name):
     """ 
     """
     
-    res = loaddir(dirpath, sim_name)
+    res = loaddir(dirpath, sim_name,gsize)
     color = iter(['r', 'g', 'b', 'y','pink', 'black', 'brown', 'grey', 'purple', 'orange'])
 
     dtplot = [] 
     
     for i in res : 
+        
         dtplot.append(i[-1])
     
     plt.scatter(dtplot)

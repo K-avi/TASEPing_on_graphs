@@ -6,6 +6,7 @@
 #include "misc.h"
 #include "movement.h"
 #include "rules.h"
+#include <bits/getopt_core.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <time.h>
@@ -22,7 +23,8 @@ int main(int argc , char ** argv){
     int8_t c; 
     uint8_t hflag = 0, saturation_coeff = 1, optcount = 0 ; //add option for the saturation coeff 
     uint32_t first_attack_it = 0; 
-    while ((c = getopt(argc, argv, "hs:f:")) != -1) {   
+    char * index = "index.csv";
+    while ((c = getopt(argc, argv, "hs:f:i:")) != -1) {   
         switch (c){
         
         case 'h':
@@ -42,12 +44,21 @@ int main(int argc , char ** argv){
 
         break;
 
+        case 'i': 
+            optcount += 2 ;
+            index = optarg;
+
+        break;
         case '?':
             if(optopt=='s'){
                 fprintf(stderr, "Option -%c requires an argument.\n", optopt);
                 report_err("main options no opt", ERRFLAG_INVALIDOPT); 
                 return ERRFLAG_INVALIDOPT;
             }if(optopt=='f'){
+                fprintf(stderr, "Option -%c requires an argument.\n", optopt);
+                report_err("main options no opt", ERRFLAG_INVALIDOPT); 
+                return ERRFLAG_INVALIDOPT;
+            }if(optopt=='i'){
                 fprintf(stderr, "Option -%c requires an argument.\n", optopt);
                 report_err("main options no opt", ERRFLAG_INVALIDOPT); 
                 return ERRFLAG_INVALIDOPT;
@@ -128,10 +139,24 @@ int main(int argc , char ** argv){
     failure = iterate_ntimes(&g, &entities, &arep, output_file, iteration_num, 0);
     if(failure){report_err("in main iterate_ntimes", failure); return failure;}
 
+
+    //writes to an index file 
+    FILE *  findex = fopen(index, "a"); 
+    if(!findex){
+        report_err("in main write to index", ERRFLAG_NOFILE);
+        return ERRFLAG_NOFILE;
+    }
+
+    fprintf(findex, "%s,%u,%u\n", output_file, g.nb_nodes, entities.nb_entities);
+    fclose(findex);
+
+
     //frees the memory
     free_graph(&g);
     free_attack_rep(&arep);
     free_entity_arr(&entities);
 
+
+    
     return 0 ;
 }//not tested
