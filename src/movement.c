@@ -93,7 +93,8 @@ uint8_t iterate_ntimes(S_GRAPH * g, S_ENT_ARR * entities, S_ATTACK_REP * arep , 
     failure = init_node_sat_arr(entities, g); 
     if(failure){report_err("iterate_ntimes", failure); return failure;}
 
-    FILE * f = fopen(fname, "w");
+    FILE * f = fopen(fname, "wl");
+    if(!f){report_err("iterate_ntimes", ERR_FOPEN); return ERR_FOPEN;}
 
     for(uint32_t i = 0; i < nb_it; i++){
         failure = prepare_ite(g, entities, arep);

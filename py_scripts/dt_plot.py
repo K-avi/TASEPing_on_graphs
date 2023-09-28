@@ -28,9 +28,12 @@ def plotdir(dirpath, sim_name):
         dict_index = dict()
         for i in index.readlines() : 
             s = i.split(",")
-            dict_index[s[0]] = int(s[2])/int(s[1])
+            
+            dict_index[s[0].split("/")[-1]] = int(s[2])/int(s[1])
         
+        print(res, dict_index)
         for i in res : 
+            
             dtplot.append( np.array( [dict_index[i[0]] , i[1][-1]] ) )
     
     print(dtplot)

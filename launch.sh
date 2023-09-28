@@ -15,15 +15,16 @@ fi
 
 #creates the index file if it doesn't exist 
 if [[ ! -f "$4/index.csv" ]]; then 
-	touch "$4/indeX.csv"
+	touch "$4/index.csv"
 fi 
 
 #launches the simulation in parallel cause the scheduler has a job to do ffs 
 for i in {0..1} ;do 
     for j in {0..9}; do 
 	for k in {0..9}; do 
-        	if [[ ! $i -eq 0 || ! $j -eq 0 ]] ; then        
-            	./tog "$1" "$2" "res/res$i.$j" "$3" "$i.$j$k" -i "$4/index.csv" 
+        	if [[ ! $i -eq 0 || ! $j -eq 0 ]] ; then  
+                echo  "$1" "$2" "$(pwd)/$4/res$i.$j$k" "$3" "$i.$j$k" -i "$4/index.csv" 
+                ./tog "$1" "$2" "$(pwd)/$4/res$i.$j$k" "$3" "$i.$j$k" -i "$4/index.csv" 
             	sleep 1 
         	fi
 	done
