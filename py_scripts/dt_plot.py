@@ -29,14 +29,14 @@ def plotdir(dirpath, sim_name):
         for i in index.readlines() : 
             s = i.split(",")
             
-            dict_index[s[0].split("/")[-1]] = int(s[2])/int(s[1])
+            dict_index[s[0].split("/")[-1]] = [int(s[2])/int(s[1]), int(s[1])]
         
-        print(res, dict_index)
+        
         for i in res : 
             
-            dtplot.append( np.array( [dict_index[i[0]] , i[1][-1]] ) )
+            dtplot.append( np.array( [dict_index[i[0]][0] , i[1][-1]/dict_index[i[0]][1]] ) )
     
-    print(dtplot)
+   
     plt.scatter(*zip(*dtplot))  
     plt.xlabel("number of entities / number of graph nodes")
     plt.ylabel("number of entities moved during last iteration / number of graph nodes")
