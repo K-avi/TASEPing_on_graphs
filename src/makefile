@@ -3,8 +3,6 @@ TARGET := ../tog
 TEST := ../test
 CC := gcc
 CFLAGS := -O2  -g -std=gnu17 -Wall -Wextra -Wpedantic -Wno-unused-parameter
-CLIBS := -lfl
-
 
 SRCS := entities.c graph.c movement.c rules.c misc.c attack.c
 

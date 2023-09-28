@@ -19,13 +19,14 @@ if [[ ! -f "$4/index.csv" ]]; then
 fi 
 
 #launches the simulation in parallel cause the scheduler has a job to do ffs 
-for i in {0..2} ;do 
-    for j in {0..9}; do  
-        if [[ ! $i -eq 0 || ! $j -eq 0 ]] ; then        
-            ./tog "$1" "$2" "res/res$i.$j" "$3" "$i.$j" -i "$4/index.csv"   
-	    
-            sleep 1 
-        fi
+for i in {0..1} ;do 
+    for j in {0..9}; do 
+	for k in {0..9}; do 
+        	if [[ ! $i -eq 0 || ! $j -eq 0 ]] ; then        
+            	./tog "$1" "$2" "res/res$i.$j" "$3" "$i.$j$k" -i "$4/index.csv" 
+            	sleep 1 
+        	fi
+	done
     done
 done
 
