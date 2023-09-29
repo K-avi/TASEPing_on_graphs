@@ -1,7 +1,7 @@
 TARGET:= tog
 TEST :=test
-
-ALLPROGS= $(TARGET) $(TEST)
+DEBUG := togdbg
+ALLPROGS= $(TARGET) $(TEST) $(DEBUG)
 
 .PHONY:	all clean
 
@@ -14,6 +14,8 @@ $(TEST):
 $(TARGET): 
 	$(MAKE) -C src/ ../tog
 
+$(DEBUG): 
+	$(MAKE) -C src/ ../togdbg
 clean:
 
 	rm -f $(ALLPROGS)
