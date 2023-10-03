@@ -1,4 +1,3 @@
-a second internship repo has hit the github page 
 
 The goal of this repo is to implement 
 a TASEP based model of entities moving on a city graph. 

@@ -73,6 +73,8 @@ int main(int argc , char ** argv){
         }     
     }
 
+    printf("Taseping On Graphs Copyright (C) 2023  Ivan MULOT-RADOJCIC This program comes with ABSOLUTELY NO WARRANTY;\nfor details see the GPLv3 documentation.\nThis is free software, and you are welcome to redistribute it under certain conditions\n\n");
+
     if(hflag){ //prints help
         fprintf(stdout, "usage : ./taseping_on_graphs [path of graph]  [path of attack] [output file] iteration_num coeff_entities\n \
         check out the docs directory for more informations\n");

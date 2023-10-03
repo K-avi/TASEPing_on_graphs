@@ -74,4 +74,3 @@ def wog_to_dict(path):
                 g[a] = edges_to
     return g
 
-g = wog_to_tog("paris_final_gendown.csv")

@@ -31,18 +31,24 @@ pending :
 
 C : 
 
-   - test the program ffs
-
+	- not much tbh 
 
 Python : 
 
   
 
+   - make a script to parse [result dir],[simulation name] and plot it 
    
+   - script to generate an attack file that relies on betweeneness 
+     centrality
+   - static attack can be "oh yeah I reduce the graph size and dassit   
+ 
    - make a script that LOADS the attack function from WOG flux trace 
 
       - need to match the hmmm the of lines in a dict this should be "ok"
-
+- shell : 
+	- script to launch multiple sims w same parameters but different 
+          attack fn's and outputs  
 Misc : 
 
    - docs
